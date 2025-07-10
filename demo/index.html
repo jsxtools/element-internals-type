@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>ElementInternals.type</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="og:title" content="ElementInternals.type" />
+		<meta name="description" content="A ponyfill for the type property on ElementInternals." />
+		<meta property="og:type" content="website" />
+		<link rel="stylesheet" href="./index.css" />
+		<script src="./lazy-ponyfill.js"></script>
+		<script>
+			customElements.define("custom-submit", class CustomSubmitElement extends HTMLElement {
+				static formAssociated = true
+
+				#internals = this.attachInternals()
+
+				constructor() {
+					super()
+
+					this.#internals.type = "submit"
+				}
+			})
+
+			customElements.define("custom-label", class CustomLabelElement extends HTMLElement {
+				static formAssociated = true
+
+				#internals = this.attachInternals()
+
+				constructor() {
+					super()
+
+					this.#internals.type = "label"
+				}
+			})
+		</script>
+	</head>
+
+	<body>
+		<h1>ElementInternals.type</h1>
+
+		<main>
+			<p>A ponyfill for the <code>type</code> property on <code>ElementInternals</code>.</p>
+
+			<form method="GET">
+				<p class="field">
+					<custom-label>
+						<span>Custom Label Wrapping Native Select</span>
+						<select id="option" name="option">
+							<option>Default Option</option>
+							<option>Alternative Option</option>
+						</select>
+					</custom-label>
+				</p>
+
+				<p class="field">
+					<custom-label for="text">Custom Label For Native Input</custom-label>
+					<input id="text" name="text" value="Default Value" />
+				</p>
+
+				<p class="field">
+					<custom-submit tabindex="0">Custom Submit</custom-submit>
+				</p>
+			</form>
+		</main>
+	</body>
+</html>

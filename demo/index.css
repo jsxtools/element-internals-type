@@ -1,0 +1,89 @@
+@layer base {
+	:root {
+		/* Text */
+		-webkit-font-smoothing: antialiased;
+		tab-size: 4;
+		text-rendering: optimizeLegibility;
+		-webkit-text-size-adjust: 100%;
+		text-size-adjust: 100%;
+
+		/* Behavior */
+		interpolate-size: allow-keywords;
+		-webkit-tap-highlight-color: transparent;
+
+		--Accent: color(srgb 0.94 0.93 0.93 / 0.9);
+		--AccentText: color(srgb 0.1 0.4 0.7);
+		--Canvas: color(srgb 1 1 1);
+		--CanvasText: color(srgb 0.21 0.22 0.25);
+	}
+
+	@media (prefers-color-scheme: dark) {
+		:root {
+			--Accent: color(srgb 0.94 0.93 0.93 / 0.9);
+			--AccentText: color(srgb 0.4 0.65 0.95);
+			--Canvas: color(srgb 0.08 0.08 0.1);
+			--CanvasText: color(srgb 0.78 0.79 0.8);
+		}
+	}
+
+	html {
+		font: 100% / 1.5 system-ui;
+		background-color: var(--Canvas);
+		color: var(--CanvasText);
+		color-scheme: light dark;
+	}
+
+	body {
+		margin: max(1rem, 10vmin);
+	}
+
+	a[href]:not([class]) {
+		/* Text */
+		text-underline-offset: 0.125em;
+		/* Appearance */
+		color: var(--AccentText);
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		font-size: inherit;
+		font-weight: inherit;
+		margin-block: 0;
+
+		&:is(body > *) {
+			/* Text */
+			font-size: 2rem;
+			font-weight: 700;
+			
+			& + * {
+				margin-block-start: 1rem;
+			}
+		}
+	}
+
+	p {
+		margin-block: 0;
+	}
+}
+
+@layer page {
+	.field {
+		margin-block: 1rem;
+	}
+
+	custom-label {
+		cursor: default;
+	}
+
+	custom-submit {
+		/* Layout */
+		padding: 0.5em;
+
+		/* Appearance */
+		box-shadow: var(--AccentText) 0 0 0 1px inset;
+		cursor: default;
+
+		&:hover, &:focus-visible {
+			background-color: color-mix(in srgb, var(--AccentText) 5%, transparent);
+		}
+	}
+}
